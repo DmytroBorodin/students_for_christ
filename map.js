@@ -5,7 +5,8 @@ chart.geodata = am4geodata_worldLow;
 
 /* Set projection */
 chart.projection = new am4maps.projections.Mercator();
-chart.homeZoomLevel = 3.55;
+chart.chartContainer.wheelable = false;
+chart.homeZoomLevel = 3.5;
 chart.homeGeoPoint = {
   latitude: 56.238,
   longitude: 1.39
