@@ -5,6 +5,11 @@ chart.geodata = am4geodata_worldLow;
 
 /* Set projection */
 chart.projection = new am4maps.projections.Mercator();
+chart.homeZoomLevel = 3.55;
+chart.homeGeoPoint = {
+  latitude: 56.238,
+  longitude: 1.39
+};
 
 /* Northern Europe */
 var series1 = chart.series.push(new am4maps.MapPolygonSeries());
