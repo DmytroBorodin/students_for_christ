@@ -121,7 +121,12 @@ series1.events.on("inited", function () {
         label.latitude = polygon.visualLatitude;
         label.longitude = polygon.visualLongitude;
         if (country.id === 'ES') {
-            label.marginTop = -40;
+            label.latitude = 40;
+            label.longitude = -4;
+        }
+        if (country.id === 'HR') {
+            label.latitude = 45.4
+            label.longitude = polygon.visualLongitude;
         }
         label.children.getIndex(0).text = countryName;
     }
