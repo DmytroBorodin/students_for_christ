@@ -1,58 +1,138 @@
 var chart = am4core.create("chartdiv", am4maps.MapChart);
 
 /* Set map definition */
-chart.geodata = am4geodata_worldLow;
+chart.geodata = am4geodata_worldHigh;
+
+/* countries background linear gradient*/
+let gradient = new am4core.LinearGradient();
+gradient.addColor(am4core.color("#F68857"));
+gradient.addColor(am4core.color("#F1DA67"));
 
 /* Set projection */
 chart.projection = new am4maps.projections.Mercator();
 chart.chartContainer.wheelable = false;
-chart.homeZoomLevel = 3.5;
+chart.homeZoomLevel = 3.854;
 chart.homeGeoPoint = {
-  latitude: 56.238,
-  longitude: 1.39
+  latitude: 56.665,
+  longitude: 10.534
 };
 
-/* Northern Europe */
-var series1 = chart.series.push(new am4maps.MapPolygonSeries());
+let ids = ["FI", "DK", "SE", "DE", "NL", "BE", "FR", "ES", "HR", "IT", "BA", "HU", "AT", "CZ", "AL", "GR", "IE"];
+
+/* Connected countries */
+let series1 = chart.series.push(new am4maps.MapPolygonSeries());
 series1.name = "Northern Europe";
 series1.useGeodata = true;
-series1.include = ["FI", "DK", "SE", "NO", "LT", "LV", "EE", "IS"];
+series1.include = ids;
 series1.mapPolygons.template.tooltipText = "{name}";
-series1.mapPolygons.template.fill = am4core.color("#96BDC6");
-series1.fill = am4core.color("#96BDC6");
+series1.mapPolygons.template.fill = gradient;
+series1.fill = gradient;
 
-/* Central Europe */
+/* Configure label series */
+let labelSeries = chart.series.push(new am4maps.MapImageSeries());
+let labelTemplate = labelSeries.mapImages.template.createChild(am4core.Label);
+labelTemplate.horizontalCenter = "middle";
+labelTemplate.verticalCenter = "middle";
+labelTemplate.fontSize = 15;
+labelTemplate.fontFamily = "Futura PT";
+labelTemplate.interactionsEnabled = false;
+labelTemplate.nonScaling = true;
+
+let countries = [
+    {
+        country: "Finland",
+        id: "FI",
+    },
+    {
+        country: "Sweden",
+        id: "SE",
+    },
+    {
+        country: "Italy",
+        id: "IT",
+    },
+    {
+        country: "Denmark",
+        id: "DK",
+    },
+    {
+        country: "Germany",
+        id: "DE",
+    },
+    {
+        country: "Netherland",
+        id: "NL",
+    },
+    {
+        country: "Ireland",
+        id: "IE",
+    },
+    {
+        country: "Belgium",
+        id: "BE",
+    },
+    {
+        country: "France",
+        id: "FR",
+    },
+    {
+        country: "Spain",
+        id: "ES",
+    },
+    {
+        country: "Croatia",
+        id: "HR",
+    },
+    {
+        country: "Austria",
+        id: "AT",
+    },
+    {
+        country: "Czech Republic",
+        id: "CZ",
+    },
+    {
+        country: "Bosnia and Herzegovina",
+        id: "BA",
+    },
+    {
+        country: "Hungary",
+        id: "HU",
+    },
+    {
+        country: "Albania",
+        id: "AL",
+    },
+    {
+        country: "Greece",
+        id: "GR",
+    },
+];
+
+// Set up label series to populate
+series1.events.on("inited", function () {
+  for(let i = 0; i < ids.length; i++){
+    let polygon = series1.getPolygonById(ids[i]);
+    if(polygon){
+        let label = labelSeries.mapImages.create();
+        let countryId = polygon.dataItem.dataContext.id;
+        let country = countries.find((obj) => countryId === obj.id);
+        let countryName = country.country;
+        label.latitude = polygon.visualLatitude;
+        label.longitude = polygon.visualLongitude;
+        if (country.id === 'ES') {
+            label.marginTop = -40;
+        }
+        label.children.getIndex(0).text = countryName;
+    }
+  }
+});
+
+/* Unconnected countries */
 var series2 = chart.series.push(new am4maps.MapPolygonSeries());
 series2.name = "Central Europe";
 series2.useGeodata = true;
-series2.include = ["AT", "CZ", "DE", "HU", "LI", "PL", "SK", "SI", "CH"];
-series2.mapPolygons.template.tooltipText = "{name}";
-series2.mapPolygons.template.fill = am4core.color("#81968F");
-series2.fill = am4core.color("#81968F");
+series2.include = ["LI", "LT", "PL", "SK", "SI", "CH", "LV", "EE", "MD", "BY", "UA", "RU", "AZ", "GE", "AM", "BG", "XK", "MK", "ME", "RO", "RS", "LU", "MC", "GB", "PT", "AD"];
+series2.mapPolygons.template.fill = am4core.color("rgba(196, 196, 196, 0.5)");
+series2.fill = am4core.color("rgba(196, 196, 196, 0.5)");
 
-/* Eastern Europe */
-var series3 = chart.series.push(new am4maps.MapPolygonSeries());
-series3.name = "Eastern Europe";
-series3.useGeodata = true;
-series3.include = ["MD", "BY", "UA", "RU", "AZ", "GE", "AM"];
-series3.mapPolygons.template.tooltipText = "{name}";
-series3.mapPolygons.template.fill = am4core.color("#CFB9A5");
-series3.fill = am4core.color("#CFB9A5");
-
-/* Southeast Europe */
-var series4 = chart.series.push(new am4maps.MapPolygonSeries());
-series4.name = "Southeast Europe";
-series4.useGeodata = true;
-series4.include = ["AL", "BA", "BG", "HR", "GR", "XK", "MK", "ME", "RO", "RS"];
-series4.mapPolygons.template.tooltipText = "{name}";
-series4.mapPolygons.template.fill = am4core.color("#E8CCBF");
-series4.fill = am4core.color("#E8CCBF");
-
-/* Western Europe */
-var series5 = chart.series.push(new am4maps.MapPolygonSeries());
-series5.name = "Western Europe";
-series5.useGeodata = true;
-series5.include = ["BE", "FR", "IE", "IT", "LU", "MC", "NL", "GB", "ES", "PT", "AD"];
-series5.mapPolygons.template.tooltipText = "{name}";
-series5.mapPolygons.template.fill = am4core.color("#99C78F");
-series5.fill = am4core.color("#99C78F");
