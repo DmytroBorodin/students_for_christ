@@ -16,6 +16,7 @@ chart.homeGeoPoint = {
   latitude: 56.665,
   longitude: 10.534
 };
+chart.tooltip.label.wrap = false;
 
 let ids = ["FI", "DK", "SE", "DE", "NL", "BE", "FR", "ES", "HR", "IT", "BA", "HU", "AT", "CZ", "AL", "GR", "IE"];
 
@@ -27,6 +28,28 @@ series1.include = ids;
 series1.mapPolygons.template.tooltipText = "{name}";
 series1.mapPolygons.template.fill = gradient;
 series1.fill = gradient;
+series1.tooltipHTML = `
+<div class="tooltip__wrapper">
+        <img src="./imgs/flag_fi.jpg" alt="" class="flag__icon">
+        <div class="tooltip__block">
+            <h3 class="tooltip__title">Group Name:</h3>
+            <p class="tooltip__text">Lumina Campus (Jyväskylä)</p>
+        </div>
+        <div class="tooltip__block">
+            <h3 class="tooltip__title">Contact Person:</h3>
+            <p class="tooltip__text">Miika & Merja Toukola</p>
+        </div>
+    </div>
+`
+
+series1.tooltip.getFillFromObject = false;
+series1.tooltip.background.fill = am4core.color("rgba(0, 0, 0, 0)");
+series1.tooltip.background.stroke = am4core.color("rgba(0, 0, 0, 0)");
+series1.tooltip.pointerOrientation = "vertical";
+let shadow = series1.tooltip.background.filters.getIndex(0);
+shadow.dx = 0;
+shadow.dy = 0;
+shadow.blur = 0;
 
 /* Configure label series */
 let labelSeries = chart.series.push(new am4maps.MapImageSeries());
@@ -37,6 +60,7 @@ labelTemplate.fontSize = 15;
 labelTemplate.fontFamily = "Futura PT";
 labelTemplate.interactionsEnabled = false;
 labelTemplate.nonScaling = true;
+labelSeries.zIndex = 2;
 
 let countries = [
     {
@@ -112,7 +136,7 @@ let countries = [
 // Set up label series to populate
 series1.events.on("inited", function () {
   for(let i = 0; i < ids.length; i++){
-    let polygon = series1.getPolygonById(ids[i]);
+      let polygon = series1.getPolygonById(ids[i]);
     if(polygon){
         let label = labelSeries.mapImages.create();
         let countryId = polygon.dataItem.dataContext.id;
