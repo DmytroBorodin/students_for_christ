@@ -477,7 +477,6 @@ function createElement(el, className) {
 
 series1.data.forEach((dataObj) => {
   let infoBlock = createElement("div", "tooltip__wrapper");
-  debugger;
   let flagImg = createElement("img", "flag__icon");
   flagImg.setAttribute("src", `${dataObj.flagURL}`);
   let infoContainer = createElement("div", "tooltip__container");
