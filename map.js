@@ -292,7 +292,7 @@ series1.data = [
     tooltipTemplate: `
         <div class="tooltip__block">
             <h3 class="tooltip__title">Group Name:</h3>
-            <p class="tooltip__text">SfC Ireland/p>
+            <p class="tooltip__text">SfC Ireland</p>
         </div>
         <div class="tooltip__block">
             <h3 class="tooltip__title">Contact Person:</h3>
