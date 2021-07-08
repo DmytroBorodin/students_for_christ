@@ -1,6 +1,10 @@
 @font-face {
   font-family: "Futura PT";
-  src: url("./fonts/FuturaPT-Demi.woff");
+  src: url("https://static1.squarespace.com/static/5873d0bcb3db2b7d5e37770e/t/60dc33b0e0e51b1f321af799/1625043888177/FuturaPT-Demi.woff");
+}
+@font-face {
+  font-family: "Proxima";
+  src: url("https://static1.squarespace.com/static/5873d0bcb3db2b7d5e37770e/t/60dc67d11c1cf62dca6920be/1625057233213/ProximaNova-Regular.woff");
 }
 
 body {
@@ -57,6 +61,13 @@ body {
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
+.country__name__title {
+  display: none;
+  font-size: 35px;
+  line-height: 1.2;
+  color: #525252;
+}
+
 .tooltip__title,
 .tooltip__text {
   font-family: "Futura PT";
@@ -67,6 +78,7 @@ body {
   letter-spacing: 0.05em;
   color: #000000;
   margin: 0;
+  text-transform: none;
 }
 
 .tooltip__text {
@@ -90,36 +102,88 @@ g[aria-labelledby="id-72-title"] {
   display: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
   .chart__container {
     display: none;
   }
   .connected__countries__mobile {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
   }
   .connected__countries__mobile .tooltip__wrapper {
+    display: flex;
+    align-items: flex-start;
     flex-direction: row;
     width: 100%;
-    max-width: 300px;
     background: rgba(0, 0, 0, 0);
     box-shadow: none;
-    margin-bottom: 40px;
-    padding: 0;
+    padding: 20px 0 20px;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .connected__countries__mobile .tooltip__wrapper:last-child {
+    border: none;
   }
   .flag__icon {
-    width: 120px;
-    margin: 0 30px 0 0;
+    width: 32%;
+    margin: 0 9% 0;
+  }
+  .country__name__title {
+    display: block;
+    font-family: "Proxima";
+    margin: 0 0 30px 0;
+  }
+  .tooltip__title,
+  .tooltip__text,
+  .inline__link {
+    font-family: "Proxima";
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  .tooltip__title,
+  .tooltip__text {
+    display: inline;
+    margin-right: 3px;
+  }
+  .tooltip__title {
+    margin-right: 3px;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .connected__countries__mobile .tooltip__wrapper {
+    display: block;
+  }
+  .flag__icon {
+    display: block;
+    width: 218px;
+    margin: 0 auto 15px;
+  }
+  .country__name__title {
+    font-size: 28px;
+    margin-bottom: 22px;
   }
   .tooltip__title,
   .tooltip__text,
   .inline__link {
     text-align: left;
-    font-size: 12px;
   }
   .tooltip__block {
     margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 374px) {
+  .tooltip__title,
+  .tooltip__text,
+  .inline__link {
+    text-align: left;
+    font-size: 14px;
+  }
+  .tooltip__block {
+    margin-bottom: 7px;
   }
 }
