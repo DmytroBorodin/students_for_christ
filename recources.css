@@ -265,9 +265,6 @@
     text-transform: none;
     font-size: 14px;
   }
-  .card__text {
-    max-width: 100%;
-  }
   .language__block.center .lang__link, .lang__link {
     width: 100%;
     text-align: left;
@@ -277,6 +274,7 @@
   }
   .card__title,  .card__text {
     text-align: left;
+    max-width: 100%;
   }
 }
 
