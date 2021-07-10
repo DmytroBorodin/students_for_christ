@@ -56,7 +56,8 @@
 .card__wrapper:hover .card__main__container {
   transform: translate(-50%, -50%) scale(1);
 }
-.card__container, .card__body {
+.card__container,
+.card__body {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -218,16 +219,19 @@
   .card__wrapper {
     padding: 0;
   }
+  .card__wrapper:hover .card__main__container {
+    transform: translate(0%, 0%) scale(1);
+  }
   .card__wrapper__bg {
-   display: none;
+    display: none;
   }
   .card__main__container {
     position: static;
-    transform:scale(1);
+    transform: scale(1);
     width: 100%;
     height: 100%;
     padding: 0;
-    background:none;
+    background: none;
     box-shadow: none;
     transition: none;
     z-index: 0;
@@ -260,19 +264,22 @@
   .card-body {
     width: 100%;
   }
-  .card__text, .lang__link {
+  .card__text,
+  .lang__link {
     font-family: "Proxima";
     text-transform: none;
     font-size: 14px;
   }
-  .language__block.center .lang__link, .lang__link {
+  .language__block.center .lang__link,
+  .lang__link {
     width: 100%;
     text-align: left;
   }
   .card__body {
     align-items: flex-start;
   }
-  .card__title,  .card__text {
+  .card__title,
+  .card__text {
     text-align: left;
     max-width: 100%;
   }
